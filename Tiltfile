@@ -157,7 +157,7 @@ def enable_database():
     objs = decode_yaml_stream(yaml)
     k8s_resource(
         workload = find_object_name(objs, "Deployment"),
-        objects = [find_object_qualified_name(objs, "Provider")],
+        # objects = [find_object_qualified_name(objs, "Provider")],
         # new_name = label.lower() + "_controller",
         labels = [label],
         resource_deps = [],
@@ -184,6 +184,6 @@ def find_all_objects_names(objs):
             qualified_names = qualified_names + ["{}:{}".format(o["metadata"]["name"], o["kind"])]
     return qualified_names
 
-enable_backend(settings.get("debug").get("backend", {}))
+# enable_backend(settings.get("debug").get("backend", {}))
 enable_database()
 
