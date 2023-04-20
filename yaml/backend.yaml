@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  selector:
+    matchLabels:
+      app: todo
+  replicas: 1 # Update the replicas from 2 to 4
+  template:
+    metadata:
+      labels:
+        app: todo
+    spec:
+      containers:
+      - name: backend
+        image: foo.com/backend:main
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: healthz
+        ports:
+        - containerPort: 80
